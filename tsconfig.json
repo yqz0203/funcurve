@@ -5,11 +5,9 @@
     "lib": ["ESNext", "DOM"],
     "outDir": "./dist",
     "rootDir": "./lib",
-
     "strict": true,
     "esModuleInterop": true,
-
-    /* Source Map Options */
-    "sourceMap": true,
-  }
+    "sourceMap": true
+  },
+  "exclude": ["test"]
 }

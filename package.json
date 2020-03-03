@@ -1,15 +1,22 @@
 {
   "name": "funcurve",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "A simple and funny way to get curve.",
   "main": "dist/index.js",
   "types": "index.d.ts",
   "scripts": {
     "test": "jest",
-    "prepublish": "tsc"
+    "prepublishOnly": "tsc"
   },
+  "homepage": "https://github.com/yqz0203/funcurve",
+  "keywords": [
+    "curve",
+    "javascript",
+    "animation",
+    "bezier"
+  ],
   "author": "yqz0203@hotmail.com",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.8.6",
     "@babel/preset-env": "^7.8.6",
@@ -20,5 +27,11 @@
   },
   "dependencies": {
     "@types/jest": "^25.1.3"
-  }
+  },
+  "files": [
+    "lib/",
+    "umd/",
+    "README.md/",
+    "index.d.ts"
+  ]
 }

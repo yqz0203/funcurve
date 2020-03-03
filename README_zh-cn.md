@@ -53,7 +53,7 @@ setTimeout(() => {
 
 ## 原理
 
-请查看：[贝塞尔曲线原理]([https://](https://yqz0203.github.io/realize-bezier/))
+请查看：[理解贝塞尔曲线](https://yqz0203.github.io/realize-bezier/)
 
 ### License
 

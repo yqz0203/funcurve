@@ -1,10 +1,13 @@
 import { Point, FuncurveConfig, FuncurveInstance } from '..';
 
+// @ts-ignore
+const Global = typeof window === 'undefined' ? global : window;
+
 const raf =
-  window.requestAnimationFrame ||
-  window.webkitRequestAnimationFrame ||
-  (fn => {
-    window.setTimeout(fn, 16);
+  Global.requestAnimationFrame ||
+  Global.webkitRequestAnimationFrame ||
+  ((fn: any) => {
+    Global.setTimeout(fn, 16);
   });
 
 function getBezierPoint(points: Point[], t: number): Point {
