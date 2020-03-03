@@ -2,6 +2,8 @@
 
 简单，方便地使用贝塞尔曲线实现动画效果。
 
+[![Build Status](https://travis-ci.com/yqz0203/funcurve.svg?branch=master)](https://travis-ci.com/yqz0203/funcurve)
+
 ## 使用方法
 
 ### 安装

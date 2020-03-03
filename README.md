@@ -2,6 +2,8 @@
 
 🚀🚀Using bezier curve to build animation easily.
 
+[![Build Status](https://travis-ci.com/yqz0203/funcurve.svg?branch=master)](https://travis-ci.com/yqz0203/funcurve)
+
 ## Usage
 
 ### Install
