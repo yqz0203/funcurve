@@ -1,6 +1,6 @@
 # Funcurve
 
-🚀🚀Using bezier curve to build animation easily.
+🚀🚀Using bezier-curve to build curve animation easily.
 
 [![Build Status](https://travis-ci.com/yqz0203/funcurve.svg?branch=master)](https://travis-ci.com/yqz0203/funcurve)
 
@@ -37,7 +37,7 @@ const fc = funcurve({
 }).start();
 ```
 
-If you want't stop current running process, call `stop()`, after that `onEnd` callback will be fired with `finished` being `false`.
+If you want to stop current running process, just call `stop()`. After that `onEnd` callback will be fired with `finished` being `false`.
 
 ```typescript
 fc.stop();
