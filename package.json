@@ -1,6 +1,6 @@
 {
   "name": "funcurve",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A simple and funny way to get curve.",
   "main": "dist/index.js",
   "types": "index.d.ts",

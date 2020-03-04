@@ -1,6 +1,6 @@
 # Funcurve
 
-简单，方便地使用贝塞尔曲线实现动画效果。
+简单，方便地使用贝塞尔曲线实现曲线动画效果。
 
 [![Build Status](https://travis-ci.com/yqz0203/funcurve.svg?branch=master)](https://travis-ci.com/yqz0203/funcurve)
 
@@ -52,6 +52,58 @@ setTimeout(() => {
   fc.start();
 }, 500);
 ```
+
+## API
+
+### `funcurve`
+
+`funcurve(config: FuncurveConfig):IFuncurve` 返回一个实例
+
+#### `config`
+
+| 属性          | 类型                            | 说明               |
+| ------------- | ------------------------------- | ------------------ |
+| controlPoints | `Point[]`                       | 贝塞尔控制点数组   |
+| duration      | `number`                        | 曲线画时间         |
+| onUpdate      | `UpdateInfo`                    | 每一帧更新时的回调 |
+| onEnd         | `UpdateInfo&{finished:boolean}` | 动画结束时的回调   |
+
+```typescript
+export interface Point {
+  x: number;
+  y: number;
+}
+
+interface UpdateInfo {
+  point: Point;
+  progress: number;
+}
+
+export interface FuncurveConfig {
+  controlPoints: Point[];
+  duration?: number;
+  onUpdate?(res: UpdateInfo): void;
+  onEnd?(res: UpdateInfo & { finished?: boolean }): void;
+}
+```
+
+#### `UpdateInfo`
+
+| 属性     | 类型      | 描述                                                       |
+| -------- | --------- | ---------------------------------------------------------- |
+| point    | `Point`   | 当前坐标点                                                 |
+| progress | `number`  | 当前进度. 0 - 1                                            |
+| finished | `boolean` | `onEnd` 回调有一个额外的 `finished` 属性来判断是否绘制完成 |
+
+### `IFuncurve`
+
+#### `start()`
+
+停止上一次处理并开始一个新的。
+
+#### `stop()`
+
+停止上一次处理。
 
 ## 原理
 
