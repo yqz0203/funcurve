@@ -2,15 +2,16 @@ import funcurve from '../lib/index';
 
 it('should finish', done => {
   let updateCount = 0;
-  const f = funcurve({
+  funcurve({
     duration: 1000,
     controlPoints: [
       { x: 100, y: 200 },
       { x: 400, y: 500 },
     ],
-    onEnd: ({ point, finished }) => {
+    onEnd: ({ point, finished, progress }) => {
       expect(updateCount > 10).toBeTruthy();
       expect(finished).toBeTruthy();
+      expect(progress).toBe(1);
       expect(point).toMatchObject({ x: 400, y: 500 });
       done();
     },
@@ -28,9 +29,10 @@ it('should not finish', done => {
       { x: 100, y: 200 },
       { x: 400, y: 500 },
     ],
-    onEnd: ({ point, finished }) => {
+    onEnd: ({ point, finished, progress }) => {
       expect(updateCount > 10).toBeTruthy();
       expect(finished).toBeFalsy();
+      expect(progress).not.toBe(1);
       expect(point).not.toMatchObject({ x: 400, y: 500 });
       done();
     },
@@ -52,15 +54,17 @@ it('should restart stop prev', done => {
       { x: 100, y: 200 },
       { x: 400, y: 500 },
     ],
-    onEnd: ({ point, finished }) => {
+    onEnd: ({ point, progress, finished }) => {
       endCount++;
       if (endCount === 1) {
         expect(finished).toBeFalsy();
+        expect(progress).not.toBe(1);
         expect(point).not.toMatchObject({ x: 400, y: 500 });
       }
 
       if (endCount === 2) {
         expect(finished).toBeTruthy();
+        expect(progress).toBe(1);
         expect(point).toMatchObject({ x: 400, y: 500 });
         done();
       }
@@ -82,15 +86,17 @@ it('should restart not trigger prev onend callback when prev has been finished',
       { x: 100, y: 200 },
       { x: 400, y: 500 },
     ],
-    onEnd: ({ point, finished }) => {
+    onEnd: ({ point, finished, progress }) => {
       endCount++;
       if (endCount === 1) {
         expect(finished).toBeTruthy();
+        expect(progress).toBe(1);
         expect(point).toMatchObject({ x: 400, y: 500 });
       }
 
       if (endCount === 2) {
         expect(finished).toBeTruthy();
+        expect(progress).toBe(1);
         expect(point).toMatchObject({ x: 400, y: 500 });
         done();
       }

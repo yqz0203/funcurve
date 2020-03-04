@@ -1,4 +1,4 @@
-import { Point, FuncurveConfig, FuncurveInstance } from '..';
+import { Point, FuncurveConfig, IFuncurve } from '..';
 
 // @ts-ignore
 const Global = typeof window === 'undefined' ? global : window;
@@ -32,9 +32,13 @@ function getNewPoint(p1: Point, p2: Point, t: number) {
   return new ControlPoint(x, y);
 }
 
-const noop = () => {};
+function noop() {}
 
-class Funcurve implements FuncurveInstance {
+class ControlPoint implements Point {
+  constructor(public x: number, public y: number) {}
+}
+
+class Funcurve implements IFuncurve {
   constructor(private config: FuncurveConfig) {
     this.runningIndex = 0;
     this.startTime = 0;
@@ -48,8 +52,9 @@ class Funcurve implements FuncurveInstance {
   private getRunningStatus() {
     const { controlPoints, duration = 1000 } = this.config;
     const t = Date.now() - this.startTime;
-    const point = getBezierPoint(controlPoints, Math.min(t / duration, 1));
-    return { point, finished: t >= duration };
+    const progress = Math.min(t / duration, 1);
+    const point = getBezierPoint(controlPoints, progress);
+    return { point, finished: t >= duration, progress };
   }
 
   start() {
@@ -69,15 +74,15 @@ class Funcurve implements FuncurveInstance {
           return;
         }
 
-        const { point, finished } = this.getRunningStatus();
+        const { point, finished, progress } = this.getRunningStatus();
 
         if (finished) {
-          onUpdate({ point });
-          onEnd({ point, finished });
+          onUpdate({ point, progress });
+          onEnd({ point, finished, progress });
           this.running = false;
           return;
         }
-        onUpdate({ point });
+        onUpdate({ point, progress });
         frame();
       });
 
@@ -97,10 +102,6 @@ class Funcurve implements FuncurveInstance {
   }
 }
 
-class ControlPoint implements Point {
-  constructor(public x: number, public y: number) {}
-}
-
-export default function funcurve(config: FuncurveConfig): FuncurveInstance {
+export default function funcurve(config: FuncurveConfig): IFuncurve {
   return new Funcurve(config);
 }
