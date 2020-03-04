@@ -109,6 +109,8 @@ Stop current process.
 
 See [Realize bezier curve](https://yqz0203.github.io/realize-bezier/)
 
+[中文文档](README_zh-cn.md)
+
 ### License
 
 [MIT](LICENSE)
